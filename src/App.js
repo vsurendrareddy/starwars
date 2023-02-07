@@ -8,11 +8,13 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 
 function App() {
   const [data, setData] = useState([]);
   const api = new Api();
+  const [max, setMax] = useState(0);
 
   const getStarShips = async() =>{
     let url = 'https://swapi.dev/api/starships';
@@ -25,8 +27,13 @@ function App() {
     }).catch((err) => console.log(err));
   }
 
+  
   useEffect(()=>{
-    
+    if(data.length > 0){
+       const arr = data.map((ele)=> {return (ele.films).length;});
+       console.log(Math.max(...arr));
+       setMax(Math.max(...arr));
+    }
   },[data])
 
   return (
@@ -102,7 +109,7 @@ function App() {
                   </Grid>
                   <Grid item lg={2}>
                     <Typography variant={'h7'} color="text.secondary">
-                      No of Films: {(ele.films).length}
+                      No of Films: {(ele.films).length}{(ele.films).length == max ? <EmojiEventsIcon color='yellow' /> : ""}
                     </Typography>
                   </Grid>
                 </Grid>
