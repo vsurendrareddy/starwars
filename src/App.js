@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import backgroundImage from '../src/assets/background.jpg';
+import logo from '../src/assets/logo.png';
 
 
 function App() {
@@ -27,7 +29,10 @@ function App() {
     }).catch((err) => console.log(err));
   }
 
-  
+  useEffect(()=>{
+    getStarShips();
+  },[])
+
   useEffect(()=>{
     if(data.length > 0){
        const arr = data.map((ele)=> {return (ele.films).length;});
@@ -37,49 +42,49 @@ function App() {
   },[data])
 
   return (
-    <Grid>
-      <Box
-        display="flex"
-        justifyContent="center"
-        flexDirection={'row'}
-        style={{
-          backgroundColor:"rgb(234, 237, 242)",
-        }}>
-          <Typography variant='h3'>
-            Starwars
-          </Typography>
+    <Grid style={{backgroundImage: `url(${backgroundImage})`, backgroundSize:'cover'}}>
+        <Grid style={{top:'3%'}}>
+          <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection={'row'}
+          style={{
+            // backgroundColor:"rgb(234, 237, 242)",
+          }}>
+            
+           <img src={logo} width={400} height={150} alt='logo' />
+          </Box>
+          <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection={'row'}
+          style={{
+            // backgroundColor:"rgb(234, 237, 242)",
+          }}>
+            <Typography variant='h4' color={'#ffffff'}>
+              Sample React Project
+            </Typography>
 
-        </Box>
+          </Box>
+          <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection={'row'}
+          style={{
+            // backgroundColor:"rgb(234, 237, 242)",
+          }}>
+            <Typography variant='h5' color={'#ffd600'}>
+                Results are sorted which crew size <br /> lessthan or equal to 10
+            </Typography>
+
+          </Box>
+        </Grid>
         <Box
         display="flex"
         justifyContent="center"
         flexDirection={'row'}
         style={{
-          backgroundColor:"rgb(234, 237, 242)",
-        }}>
-          <Typography variant='h4'>
-            Sample React Project
-          </Typography>
-
-        </Box>
-        <Box
-        display="flex"
-        justifyContent="center"
-        flexDirection={'row'}
-        style={{
-          backgroundColor:"rgb(234, 237, 242)",
-        }}>
-          <Typography variant='h5'>
-              Results are sorted which crew size lessthan or equal to 10
-          </Typography>
-
-        </Box>
-        <Box
-        display="flex"
-        justifyContent="center"
-        flexDirection={'row'}
-        style={{
-          backgroundColor:"rgb(234, 237, 242)", 
+          // backgroundColor:"rgb(234, 237, 242)", 
         }}>
            <Button variant="contained" onClick={() => getStarShips()} sx={{margin:'2%'}}>Get StarShips</Button>
         </Box>
@@ -91,15 +96,15 @@ function App() {
         justifyContent="center"
         flexDirection={'row'}
         style={{
-          backgroundColor:"rgb(234, 237, 242)",
+          // backgroundColor:"rgb(234, 237, 242)",
         }}
         key={i}
       >
         <Grid item lg={10} md={10} sm={10} xs={10} justifyContent="center" alignItems="center" sx={{ width: '80%', marginTop: '2%', marginBottom:'2%' }}>
-            <Card sx={{ minWidth: 275 }}>
+            <Card sx={{ minWidth: 275, backgroundColor:'#ffd600' }}>
               <CardContent>
                 <Grid container>
-                  <Grid item lg={10}>
+                  <Grid item lg={10} xs={12} md={10} sm={12}>
                     <Typography variant={'h5'} color="text.primary">
                       {ele.name}
                     </Typography>
@@ -107,9 +112,12 @@ function App() {
                       Model: {ele.model}
                     </Typography>
                   </Grid>
-                  <Grid item lg={2}>
-                    <Typography variant={'h7'} color="text.secondary">
-                      No of Films: {(ele.films).length}{(ele.films).length == max ? <EmojiEventsIcon color='yellow' /> : ""}
+                  <Grid item lg={2} xs={12} md={2} sm={12}>
+                    <Typography color="text.secondary">
+                      No of Films: {(ele.films).length}
+                     </Typography><br /> 
+                    <Typography color="text.secondary">
+                     {(ele.films).length == max ? <EmojiEventsIcon fontSize={'20'} style={{color:'red', fontSize:30, marginLeft:"25%"}} /> : ""}
                     </Typography>
                   </Grid>
                 </Grid>
