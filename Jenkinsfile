@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     def npmCommand = isUnix() ? 'npm' : 'npm.cmd'
-                    sh "${npmCommand} install --legacy-peer-deps"
+                    sh "${npmCommand} install"
                 }
             }
         }
